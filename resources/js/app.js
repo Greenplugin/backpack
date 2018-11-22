@@ -1,33 +1,33 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import axios from 'axios'
+import App from './components/App.vue'
+import routes from './routes'
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+// loads the Icon plugin
+UIkit.use(Icons);
 
-require('./bootstrap');
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
-window.Vue = require('vue');
+let token = document.head.querySelector('meta[name="csrf-token"]')
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+if (token) {
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
+} else {
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
+}
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.use(VueRouter)
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
+const router = new VueRouter({
+  mode: 'history',
+  routes: routes
+})
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app'
-});
+new Vue({
+  router,
+  render: h => h(App),
+})
+  .$mount('#app')

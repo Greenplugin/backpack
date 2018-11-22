@@ -16,7 +16,7 @@ class CreateItemsGroupsTable extends Migration
         Schema::create('items_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('min_count');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

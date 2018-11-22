@@ -6,5 +6,13 @@ namespace App\Service\Packing;
 
 interface ItemInterface
 {
+    /**
+     * @return string
+     */
+    public function getName();
 
+    /**
+     * @return float
+     */
+    public function getVolume();
 }

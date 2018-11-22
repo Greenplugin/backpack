@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::get('/groups-with-items', 'GroupsController@getGroupsWithItemsAction')->name('groupWithItems');
+
+Route::get('/task/{id}', 'TasksController@getTask')->name('getTask');
+Route::get('/tasks', 'TasksController@getTasks')->name('getTasks');
+Route::post('/task/{id}', 'TasksController@updateTask')->name('updateOrCreateTask');
+
+Route::post('/task/run/{id}', 'TasksController@runTask')->name('runTask');

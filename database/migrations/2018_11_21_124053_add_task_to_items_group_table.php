@@ -13,8 +13,9 @@ class AddTaskToItemsGroupTable extends Migration
      */
     public function up()
     {
-        Schema::table('items_group', function (Blueprint $table) {
-            //
+        Schema::create('items_group_task', function (Blueprint $table) {
+            $table->unsignedInteger('items_group_id');
+            $table->unsignedInteger('task_id');
         });
     }
 
@@ -25,7 +26,7 @@ class AddTaskToItemsGroupTable extends Migration
      */
     public function down()
     {
-        Schema::table('items_group', function (Blueprint $table) {
+        Schema::drop('items_group_task', function (Blueprint $table) {
             //
         });
     }

@@ -15,7 +15,12 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->unsignedInteger('items_group_id');
+            $table->string('name', 128);
+            $table->float('volume');
+//            $table->timestamps();
+
+//            $table->foreign('grop_id')->references('id')->on('items_groups');
         });
     }
 
